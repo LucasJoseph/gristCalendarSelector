@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Declare Availability</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <h1>Declare Availability</h1>
+      <p class="app-subtitle">Make your desk available for others</p>
+    </header>
+
+    <main class="form-card">
+
+      <!-- ── Person ─────────────────────────────────────────── -->
+      <div class="field">
+        <label for="who-input">Who are you?</label>
+        <div class="autocomplete-wrapper">
+          <input type="text" id="who-input" class="autocomplete-input"
+            placeholder="Type a name…" autocomplete="off" spellcheck="false" />
+          <ul class="autocomplete-list" id="who-list" role="listbox"></ul>
+        </div>
+        <input type="hidden" id="who-id" />
+      </div>
+
+      <!-- ── Period ─────────────────────────────────────────── -->
+      <div class="field">
+        <label>Period</label>
+        <div class="period-group">
+          <button class="period-btn active" data-value="">All day</button>
+          <button class="period-btn" data-value="Morning">Morning</button>
+          <button class="period-btn" data-value="Afternoon">Afternoon</button>
+        </div>
+        <input type="hidden" id="period-value" value="" />
+      </div>
+
+      <!-- ── Date range ──────────────────────────────────────── -->
+      <div class="field">
+        <label for="start-date">Start date</label>
+        <input type="date" id="start-date" class="date-input" />
+      </div>
+
+      <div class="field">
+        <label for="end-date">End date <span class="label-hint">(same as start for a single day)</span></label>
+        <input type="date" id="end-date" class="date-input" />
+      </div>
+
+      <!-- ── Quick multi-day shortcuts ──────────────────────── -->
+      <div class="field">
+        <label>Quick select</label>
+        <div class="shortcut-group">
+          <button class="shortcut-btn" onclick="setToday()">Today</button>
+          <button class="shortcut-btn" onclick="setTomorrow()">Tomorrow</button>
+          <button class="shortcut-btn" onclick="setThisWeek()">This week</button>
+          <button class="shortcut-btn" onclick="setNextWeek()">Next week</button>
+        </div>
+      </div>
+
+      <!-- ── Weekdays only toggle ────────────────────────────── -->
+      <div class="field field-inline">
+        <label for="weekdays-only">Weekdays only</label>
+        <input type="checkbox" id="weekdays-only" checked />
+      </div>
+
+      <!-- ── Preview ────────────────────────────────────────── -->
+      <div class="preview" id="preview"></div>
+
+      <!-- ── Submit ─────────────────────────────────────────── -->
+      <button class="btn-submit" id="submit-btn" onclick="submitAvailability()">
+        Declare availability
+      </button>
+
+    </main>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

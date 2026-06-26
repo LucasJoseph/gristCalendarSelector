@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════════
+   style.css — Declare Availability Widget
+════════════════════════════════════════════════════════════════ */
+
+:root {
+  --blue-50:   #E6F1FB;
+  --blue-600:  #185FA5;
+  --blue-800:  #0C447C;
+  --gray-50:   #F1EFE8;
+  --gray-100:  #D3D1C7;
+  --gray-200:  #B4B2A9;
+  --gray-400:  #888780;
+  --gray-600:  #5F5E5A;
+  --gray-800:  #444441;
+  --teal-600:  #0F6E56;
+  --coral-600: #993C1D;
+  --green-50:  #EAF3DE;
+  --green-700: #3B6D11;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f8f7f4;
+  color: #2c2c2a;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.app-header {
+  margin-bottom: 16px;
+}
+.app-header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.app-subtitle {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 2px;
+}
+
+.form-card {
+  background: white;
+  border-radius: 10px;
+  border: 0.5px solid var(--gray-100);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Fields ──────────────────────────────────────────────────── */
+.field label {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-600);
+  margin-bottom: 5px;
+}
+.label-hint {
+  font-weight: 400;
+  opacity: 0.7;
+}
+.field-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.field-inline label { margin-bottom: 0; }
+
+/* ── Date inputs ─────────────────────────────────────────────── */
+.date-input {
+  width: 100%;
+  border: 0.5px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--gray-800);
+  background: white;
+  outline: none;
+}
+.date-input:focus { border-color: var(--blue-600); }
+
+/* ── Period toggle buttons ───────────────────────────────────── */
+.period-group {
+  display: flex;
+  gap: 8px;
+}
+.period-btn {
+  flex: 1;
+  border: 0.5px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  color: var(--gray-600);
+  transition: all 0.15s;
+}
+.period-btn:hover { background: var(--gray-50); }
+.period-btn.active {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+  color: white;
+  font-weight: 500;
+}
+
+/* ── Quick shortcuts ─────────────────────────────────────────── */
+.shortcut-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.shortcut-btn {
+  border: 0.5px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background: white;
+  color: var(--gray-600);
+  transition: background 0.15s;
+}
+.shortcut-btn:hover { background: var(--gray-50); }
+
+/* ── Preview box ─────────────────────────────────────────────── */
+.preview {
+  background: var(--blue-50);
+  border: 0.5px solid var(--blue-600);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--blue-800);
+  line-height: 1.6;
+  display: none;
+}
+.preview.visible { display: block; }
+.preview strong { font-weight: 600; }
+
+/* ── Submit button ───────────────────────────────────────────── */
+.btn-submit {
+  width: 100%;
+  background: var(--blue-600);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-submit:hover   { background: var(--blue-800); }
+.btn-submit.loading { opacity: 0.6; pointer-events: none; }
+
+/* ── Autocomplete ────────────────────────────────────────────── */
+.autocomplete-wrapper { position: relative; }
+
+.autocomplete-input {
+  width: 100%;
+  border: 0.5px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--gray-800);
+  background: white;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.autocomplete-input:focus     { border-color: var(--blue-600); }
+.autocomplete-input.confirmed { border-color: var(--teal-600); background: #E1F5EE; }
+
+.autocomplete-list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: white;
+  border: 0.5px solid var(--gray-200);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 100;
+  list-style: none;
+  padding: 4px 0;
+}
+.autocomplete-list.open { display: block; }
+.autocomplete-list li {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.autocomplete-list li:hover,
+.autocomplete-list li.active { background: var(--blue-50); color: var(--blue-800); }
+.autocomplete-list li mark { background: none; color: var(--blue-600); font-weight: 600; }
+
+/* ── Toast ───────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--gray-800);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.toast.show    { opacity: 1; }
+.toast.success { background: var(--teal-600); }
+.toast.error   { background: var(--coral-600); }
